@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.lywq.demo.modular.userModular.dao.LoginMapper">
+    <insert id="register">
+        INSERT INTO `user_info` (
+          `user_name`,
+          `password`,
+          `salt`,
+           sex,
+          idcard,
+          cjdata,
+          phoneNum,
+          wechat,
+          address,
+          roles,
+          email
+        )
+        VALUES
+          (
+            #{userName},
+            #{password},
+            #{salt},
+             #{sex},
+          #{idcard},
+          #{cjdata},
+          #{phoneNum},
+          #{wechat},
+          #{address},
+          #{roles},
+          #{email}
+          )
+    </insert>
+    <select id="queryUserByUserName" resultType="com.lywq.demo.modular.userModular.model.UserInfo">
+        SELECT
+        `id`,
+        `user_name`,
+        `password`,
+        `salt`
+        FROM
+        `user_info`
+        WHERE `user_name` = #{userName}
+        <if test="password!=null and password!=''">
+            and `password` = #{password}
+        </if>
+    </select>
+</mapper>
